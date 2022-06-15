@@ -1,0 +1,21 @@
+// Setup
+@import "./Setup/fonts";
+@import "./Setup/variables";
+@import "./Setup/utils";
+@import "./Setup/base";
+//// Pages
+// Homepage
+@import "./Pages/Homepage/Homepage.scss";
+@import "./Pages/Homepage/Header.scss";
+@import "./Pages/Homepage/HomepageContent.scss";
+@import "./Pages/Homepage/People.scss";
+@import "./Pages/Homepage/Awards.scss";
+@import "./Pages/Homepage/Sustainability.scss";
+
+// Frames
+
+// Components
+@import "./Components/LineComponent.scss"; // React-var-gui
+@import "./Components/Footer.scss"; // React-var-gui
+// @import "/node_modules/react-dat-gui/dist/index.css";
+// @import "./Setup/datGui";

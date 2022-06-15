@@ -1,0 +1,29 @@
+#Footer {
+  background-color: $dark;
+  height: 100vh;
+  color: white;
+  padding: 16px;
+
+  h2 {
+    width: 45%;
+    font-size: 2rem;
+    font-weight: 600;
+
+    a {
+      color: $sombreGreen;
+      cursor: pointer;
+      pointer-events: all;
+    }
+  }
+
+  .iconContainer {
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    img {
+      width: 33vw;
+    }
+  }
+}

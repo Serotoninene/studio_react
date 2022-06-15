@@ -1,0 +1,45 @@
+.LineComponent {
+  border-top: 1px solid $grey;
+  .lineContent {
+    width: 100%;
+    padding: 16px 72px;
+  }
+
+  p {
+    font-size: 1.4rem;
+    font-weight: 400;
+    transform: translateY(3px);
+  }
+
+  .title {
+    grid-column: 1/5;
+  }
+  .description {
+    grid-column: 6/11;
+  }
+
+  .plus {
+    grid-column: 12/13;
+    color: $sombreGreen;
+  }
+
+  .accordionContainer {
+    padding: 0 72px;
+    overflow: hidden;
+    height: 0;
+    .contact {
+      grid-column: 1/5;
+    }
+    .bio {
+      margin: 16px 0;
+
+      grid-column: 6/13;
+      p {
+        font-size: 1rem;
+        text-indent: 3%;
+        font-weight: 400;
+        line-height: 130%;
+      }
+    }
+  }
+}

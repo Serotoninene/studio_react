@@ -1,0 +1,32 @@
+#Sustainability {
+  padding: 0 72px;
+  padding-bottom: 80px;
+
+  .contentText {
+    grid-column: 8/13;
+
+    h2 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      line-height: 110%;
+      margin-bottom: 24px;
+    }
+
+    p {
+      text-indent: 7%;
+      line-height: 130%;
+    }
+
+    p:last-of-type {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: $sombreGreen;
+    }
+  }
+
+  .contentImage {
+    grid-column: 1/7;
+  }
+}

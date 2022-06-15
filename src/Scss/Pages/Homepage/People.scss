@@ -1,0 +1,23 @@
+#People {
+  margin-bottom: 128px;
+  h3 {
+    padding: 0 72px;
+    font-size: 2.3rem;
+    font-weight: 800;
+    margin-bottom: 32px;
+  }
+
+  .LineComponent:last-of-type {
+    border-bottom: 1px solid $grey;
+  }
+
+  .portraits {
+    position: fixed;
+    width: 300px;
+    height: 234px;
+    background-size: cover;
+    background-position: center;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+}

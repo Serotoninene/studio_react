@@ -1,0 +1,26 @@
+#HomepageContent {
+  padding: 0 72px;
+  margin-bottom: 160px;
+
+  .contentText {
+    grid-column: 1/5;
+
+    h2 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      line-height: 110%;
+      margin-bottom: 24px;
+    }
+
+    p {
+      width: 85%;
+      text-indent: 7%;
+      // font-weight: 200;
+      line-height: 130%;
+    }
+  }
+
+  .contentImage {
+    grid-column: 7/13;
+  }
+}

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const awards = [
   {
@@ -166,6 +167,7 @@ const awards = [
 
 export function LineAward({ content }) {
   const [accOpen, setAccOpen] = useState(false);
+
   return (
     <div className="LineAward" onClick={() => setAccOpen(!accOpen)}>
       <div className="grid lineContent relative">
@@ -205,12 +207,56 @@ export function LineAward({ content }) {
 }
 
 export default function Awards() {
+  const control = useAnimation();
+  const [ref, inView] = useInView({ rootMargin: "-300px", triggerOnce: true });
+  const homepageFramesVariant = {
+    hidden: { opacity: 0, y: 100 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: [0.6, 0.05, -0.01, 0.9],
+        duration: 0.5,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const childrenVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        ease: [0.6, 0.05, -0.01, 0.9],
+        duration: 0.5,
+      },
+    },
+  };
+
+  useEffect(() => {
+    if (inView) {
+      control.start("visible");
+    }
+  }, [control, inView]);
+
   return (
-    <div id="Awards" data-scroll-section>
+    <motion.div
+      id="Awards"
+      ref={ref}
+      key="Awards"
+      variants={homepageFramesVariant}
+      initial="hidden"
+      animate={control}
+      data-scroll-section
+    >
       <h3>Awards</h3>
       {awards.map((award) => (
-        <LineAward key={awards.id} content={award} />
+        <motion.div variants={childrenVariants} key={awards.id}>
+          <LineAward content={award} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

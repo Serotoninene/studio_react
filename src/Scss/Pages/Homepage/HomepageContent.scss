@@ -1,6 +1,10 @@
 #HomepageContent {
+  position: relative;
   padding: 0 72px;
   margin-bottom: 160px;
+  opacity: 0;
+  transition-delay: 1;
+  transition: opacity 0.5s ease-in;
 
   .contentText {
     grid-column: 1/5;
@@ -22,5 +26,9 @@
 
   .contentImage {
     grid-column: 7/13;
+  }
+
+  &.is-reveal {
+    opacity: 1;
   }
 }

@@ -5,9 +5,24 @@ import { motion } from "framer-motion";
 export default function LinePeople({ content, setPhotoDisplayed }) {
   const [accOpen, setAccOpen] = useState(false);
 
+  const childrenVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        ease: [0.6, 0.05, -0.01, 0.9],
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
-    <div
+    <motion.div
+      key={content.id}
       className="LineComponent"
+      variants={childrenVariants}
       onClick={() => content.accordion && setAccOpen(!accOpen)}
       style={{ cursor: content.accordion && "pointer" }}
       onMouseEnter={() => {
@@ -40,6 +55,6 @@ export default function LinePeople({ content, setPhotoDisplayed }) {
           </div>
         </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }

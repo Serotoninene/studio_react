@@ -4,44 +4,59 @@ import { motion } from "framer-motion";
 import video from "../../Assets/Videos/Timelapse-sequence-3-FINAL.mp4";
 
 export default function Header() {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
+  const boxVariants = {
+    out: {},
+    in: {
       transition: {
-        staggerChildren: 5,
+        duration: 0.6,
+        delayChildren: 1,
+        staggerChildren: 0.05,
       },
+    },
+  };
+
+  const iconVariants = {
+    out: {
+      opacity: 0,
+      y: 100,
+    },
+    in: {
+      opacity: 1,
+      y: 0,
+      transition: { ease: [0.6, 0.05, -0.01, 0.9] },
     },
   };
 
   return (
     <motion.div
       id="Header"
-      className=""
+      className="relative"
       data-scroll-section
-      variants={container}
+      variants={boxVariants}
+      initial="out"
+      animate="in"
       key="header"
     >
-      <h1
-        // initial={{ opacity: 0 }}
-        // animate={{ opacity: 1 }}
-        // transition={{ ease: "easeOut" }}
-        key="headerTitle"
-      >
+      <motion.h1 variants={iconVariants} key="headerTitle">
         Studio,
-      </h1>
+      </motion.h1>
 
       <div className="videoContainer relative">
-        <motion.p
-          initial={{ y: "100vh" }}
-          animate={{ y: 0 }}
-          transition={{ ease: "easeOut" }}
-          className="absolute"
-        >
+        <motion.p variants={iconVariants} className="absolute">
           Brand, Strategy, <br /> Identity, Packaging,
           <br /> Form, Communications.
         </motion.p>
-        <video src={video} loop muted playsInline autoPlay preload="metadata" />
+        <motion.div variants={iconVariants}>
+          <video
+            src={video}
+            variants={boxVariants}
+            loop
+            muted
+            playsInline
+            autoPlay
+            preload="metadata"
+          />
+        </motion.div>
       </div>
     </motion.div>
   );

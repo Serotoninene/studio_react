@@ -1,0 +1,66 @@
+#Navbar {
+  right: 16px;
+  top: 16px;
+  z-index: 10;
+
+  p {
+    font-size: 24px;
+    color: $dark;
+    font-weight: 800;
+    pointer-events: all;
+    cursor: pointer;
+    transition: color 0.2s ease-out;
+  }
+
+  p.open {
+    color: white;
+  }
+}
+
+.menu {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  padding: 16px 112px 16px 25vw;
+  background-color: $dark;
+  z-index: 11;
+  color: white;
+
+  .closeTag {
+    right: 16px;
+    top: 16px;
+    font-size: 24px;
+    font-weight: 800;
+    pointer-events: all;
+    cursor: pointer;
+  }
+
+  .links {
+    flex-wrap: wrap;
+    font-size: 7rem;
+    font-weight: 800;
+
+    a {
+      line-height: 130%;
+      display: inline-block;
+      margin-left: 1rem;
+      transform-origin: 50% 0;
+      transition: ease-out 0.1s color;
+
+      &:hover {
+        color: $sombreGreen;
+      }
+    }
+
+    a:last-of-type {
+      color: $sombreGreen;
+    }
+  }
+
+  .footer {
+    .section {
+      grid-column-start: span 6;
+    }
+  }
+}

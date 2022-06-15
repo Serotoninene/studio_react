@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 // Components
 import LinePeople from "../../Components/LinePeople";
 // Assets
@@ -52,13 +53,16 @@ const peopleContent = [
 
 export function FollowingPortrait({ hovered, photoDisplayed }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // The function that will set the mousePosition state (works inside the eventListener below)
   const onMouseMove = (event) => {
     setMousePosition({
       x: event.clientX,
-      y: event.clientY,
+      y: event.screenY,
     });
   };
 
+  // Triggering the hover animation, that follows the mouse
   useEffect(() => {
     window.addEventListener("mousemove", onMouseMove);
     return () => {
@@ -81,29 +85,70 @@ export function FollowingPortrait({ hovered, photoDisplayed }) {
   );
 }
 
-export default function People() {
+export default function People({}) {
   const [hovered, setHovered] = useState(false);
+  // state keeping track of which photo must be shown
   const [photoDisplayed, setPhotoDisplayed] = useState(images.ryan);
 
+  const control = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: true });
+  const homepageFramesVariant = {
+    hidden: { opacity: 0, y: 100 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: [0.6, 0.05, -0.01, 0.9],
+        duration: 0.5,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const childrenVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        ease: [0.6, 0.05, -0.01, 0.9],
+        duration: 0.5,
+      },
+    },
+  };
+
+  useEffect(() => {
+    if (inView) {
+      control.start("visible");
+    }
+  }, [control, inView]);
+
   return (
-    <div
+    <motion.div
       id="People"
+      ref={ref}
+      key="People"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      variants={homepageFramesVariant}
+      initial="hidden"
+      animate={control}
       data-scroll-section
     >
       <h3>People</h3>
-      <div>
+      <div className="lineContainer">
         {peopleContent.map((person) => (
-          <LinePeople
-            key={person.id}
-            content={person}
-            setPhotoDisplayed={setPhotoDisplayed}
-          />
+          <motion.div variants={childrenVariants} key={person.id}>
+            <LinePeople
+              content={person}
+              setPhotoDisplayed={setPhotoDisplayed}
+            />
+          </motion.div>
         ))}
       </div>
 
       <FollowingPortrait hovered={hovered} photoDisplayed={photoDisplayed} />
-    </div>
+    </motion.div>
   );
 }

@@ -45,6 +45,7 @@ export default function HomepageContent({ homepageFramesVariant }) {
       // initial="hidden"
       // animate={control}
       data-scroll
+      data-scroll-direction="horizontal"
       data-scroll-section
     >
       <div className="contentText section">

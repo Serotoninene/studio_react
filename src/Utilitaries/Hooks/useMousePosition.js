@@ -13,11 +13,11 @@ export default function useMousePosition() {
     };
 
     //Je lance l'eventListener
-    document.addEventListener("mousemove", mouseMoveHandler);
+    window.addEventListener("mousemove", mouseMoveHandler);
 
     //Je supprime l'eventListener pour optimiser les performances
     return () => {
-      document.removeEventListener("mousemove", mouseMoveHandler);
+      window.removeEventListener("mousemove", mouseMoveHandler);
     };
   }, []);
 

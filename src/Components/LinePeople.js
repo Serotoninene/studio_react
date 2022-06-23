@@ -39,6 +39,7 @@ export default function LinePeople({ content, setPhotoDisplayed }) {
       {content.accordion && (
         <motion.div
           className="accordionContainer grid"
+          layout
           initial={{ height: 0 }}
           animate={{
             height: accOpen ? "100%" : "0",

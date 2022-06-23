@@ -174,6 +174,7 @@ export function LineAward({ content }) {
         <p className="year">{content.year}</p>
         <motion.div
           className="awardsContainer"
+          layout
           initial={{ height: 0, opacity: 0 }}
           animate={{
             height: accOpen ? "100%" : "0",
@@ -182,11 +183,11 @@ export function LineAward({ content }) {
           transition={{ ease: [0.6, 0.05, -0.01, 0.9] }}
         >
           {content.competitions.map((competition, id) => (
-            <div key={id * 10} className="grid">
+            <div key={id} className="grid">
               <p className="awardName">{competition.name}</p>
               <div className="project-reward">
                 {competition.projects.map((p, id) => (
-                  <div className="flex justify-between" key={id}>
+                  <div className="flex justify-between" key={id * 10}>
                     <p>{p.project}</p>
                     <p>{p.award}</p>
                   </div>
@@ -252,8 +253,8 @@ export default function Awards() {
       data-scroll-section
     >
       <h3>Awards</h3>
-      {awards.map((award) => (
-        <motion.div variants={childrenVariants} key={awards.id}>
+      {awards.map((award, id) => (
+        <motion.div variants={childrenVariants} key={id * 1000}>
           <LineAward content={award} />
         </motion.div>
       ))}

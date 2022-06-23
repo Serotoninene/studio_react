@@ -17,22 +17,30 @@ export default function Homepage() {
   // We need to create a state to wait for the elements to be mounted and the
   // framer motion intro anim to be done for the smooth scroll to start
   const [locoStart, setLocoStart] = useState(false);
+  let locoScroll = useRef();
 
   useEffect(() => {
-    let locoScroll = null;
-    if (locoStart) {
-      locoScroll = new LocomotiveScroll({
-        el: scrollContainer.current,
-        smooth: false,
-        multiplier: 1,
-        class: "is-reveal",
-      });
-    }
+    locoScroll.current = new LocomotiveScroll({
+      el: scrollContainer.current,
+      smooth: false,
+      multiplier: 0.8,
+      lerp: 10,
+      class: "is-reveal",
+    });
 
     return () => {
       // Before the component get unmounted, we destroy the locoscroll instance
-      locoStart && locoScroll.destroy();
+      locoScroll.current.destroy();
     };
+  }, []);
+
+  useEffect(() => {
+    if (locoStart) {
+      locoScroll.current.destroy();
+      locoScroll.current.init();
+      locoScroll.current.update();
+    }
+    locoScroll.current.update();
   }, [locoStart]);
 
   const homepageFramesVariant = {

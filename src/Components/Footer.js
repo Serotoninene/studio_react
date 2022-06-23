@@ -19,7 +19,11 @@ export default function Footer() {
       <div className="footerFooter flex justify-between">
         <p>@Marx</p>
         <p>Contact Us</p>
-        <p>Instagram,Linkedin,Facebook</p>
+        <ul className="flex">
+          <li>Instagram,</li>
+          <li>Linkedin,</li>
+          <li>Facebook</li>
+        </ul>
       </div>
     </div>
   );

@@ -36,6 +36,47 @@
     cursor: pointer;
   }
 
+  .hiddenPoint-container {
+    width: 160px;
+    height: 160px;
+    top: 50vh;
+    left: 10vw;
+
+    .hiddenPoint {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background-color: $lightGrey;
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+      transition: all 0.1s ease-out;
+      transition-property: background-color, transform;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $sombreGreen;
+      }
+    }
+  }
+
+  .hiddenPicture {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+
+    h1 {
+      position: absolute;
+      left: 40%;
+      top: 24px;
+      font-size: 7rem;
+      font-weight: 900;
+    }
+  }
+
   .links {
     flex-wrap: wrap;
     font-size: 7rem;

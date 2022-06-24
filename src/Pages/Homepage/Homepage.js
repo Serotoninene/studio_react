@@ -8,40 +8,59 @@ import Sustainability from "./Sustainability.js";
 import Footer from "../../Components/Footer";
 // framer motion
 import { AnimatePresence, motion } from "framer-motion";
-// Loco
-import LocomotiveScroll from "locomotive-scroll";
-import "locomotive-scroll/src/locomotive-scroll.scss";
+// Utils
+import debounce from "lodash.debounce";
+// Custom hook
+import useWindowSize from "../../Utilitaries/Hooks/useWindowSize.js";
 
 export default function Homepage() {
+  const size = useWindowSize();
+  const homepage = useRef();
   const scrollContainer = useRef();
   // We need to create a state to wait for the elements to be mounted and the
   // framer motion intro anim to be done for the smooth scroll to start
   const [locoStart, setLocoStart] = useState(false);
-  let locoScroll = useRef();
+
+  // Configs
+  const data = {
+    ease: 0.1,
+    current: 0,
+    previous: 0,
+    rounded: 0.3,
+  };
 
   useEffect(() => {
-    locoScroll.current = new LocomotiveScroll({
-      el: scrollContainer.current,
-      smooth: true,
-      multiplier: 0.8,
-      lerp: 1.5,
-      class: "is-reveal",
-    });
-
-    return () => {
-      // Before the component get unmounted, we destroy the locoscroll instance
-      locoScroll.current.destroy();
-    };
+    requestAnimationFrame(() => skewScrolling());
   }, []);
 
   useEffect(() => {
-    if (locoStart) {
-      locoScroll.current.destroy();
-      locoScroll.current.init();
-      locoScroll.current.update();
-    }
-    locoScroll.current.update();
-  }, [locoStart]);
+    // document.body.style.height = `${
+    //   scrollContainer.current.getBoundingClienRect().height
+    // }px`;
+    const scrollContainerHeight =
+      scrollContainer.current.getBoundingClientRect().height;
+    document.body.style.height = `${scrollContainerHeight}px`;
+  }, [size]);
+
+  // Scrolling
+  const skewScrolling = () => {
+    //Set Current to the scroll position amount
+    data.current = window.scrollY;
+    // Set Previous to the scroll previous position
+    data.previous += (data.current - data.previous) * data.ease;
+    // Set rounded to
+    data.rounded = Math.round(data.previous * 100) / 100;
+
+    // Difference between
+    const difference = data.current - data.rounded;
+    const acceleration = difference / size.width;
+
+    //Assign skew and smooth scrolling to the scroll container
+    scrollContainer.current.style.transform = `translate3d(0, -${data.rounded}px, 0)`;
+
+    //loop vai raf
+    requestAnimationFrame(() => skewScrolling());
+  };
 
   const homepageFramesVariant = {
     hidden: { opacity: 0, y: 100 },
@@ -68,7 +87,7 @@ export default function Homepage() {
       <motion.div
         key="homepage"
         id="Homepage"
-        ref={scrollContainer}
+        ref={homepage}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7, duration: 0.5, ease: "easeIn" }}
@@ -77,12 +96,14 @@ export default function Homepage() {
           setLocoStart(true);
         }}
       >
-        <Header homepageFramesVariant={homepageFramesVariant} />
-        <HomepageContent homepageFramesVariant={homepageFramesVariant} />
-        <People homepageFramesVariant={homepageFramesVariant} />
-        <Awards homepageFramesVariant={homepageFramesVariant} />
-        <Sustainability homepageFramesVariant={homepageFramesVariant} />
-        <Footer homepageFramesVariant={homepageFramesVariant} />
+        <div className="scrollContainer" ref={scrollContainer}>
+          <Header homepageFramesVariant={homepageFramesVariant} />
+          <HomepageContent homepageFramesVariant={homepageFramesVariant} />
+          <People homepageFramesVariant={homepageFramesVariant} />
+          <Awards homepageFramesVariant={homepageFramesVariant} />
+          <Sustainability homepageFramesVariant={homepageFramesVariant} />
+          <Footer homepageFramesVariant={homepageFramesVariant} />
+        </div>
       </motion.div>
     </AnimatePresence>
   );

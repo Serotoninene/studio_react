@@ -36,36 +36,37 @@ export default function Header() {
   };
 
   return (
-    <motion.div
-      id="Header"
-      className="relative"
-      data-scroll-section
-      variants={boxVariants}
-      initial="out"
-      animate="in"
-      key="header"
-      custom={isIntroDone}
-    >
-      <motion.h1 layout variants={iconVariants} key="headerTitle">
-        <span>Studio,</span>{" "}
-      </motion.h1>
-      <div className="videoContainer relative">
-        <motion.p variants={iconVariants} className="absolute">
-          Brand, Strategy, <br /> Identity, Packaging,
-          <br /> Form, Communications.
-        </motion.p>
-        <motion.div variants={iconVariants}>
-          <video
-            src={video}
-            variants={boxVariants}
-            loop
-            muted
-            playsInline
-            autoPlay
-            preload="metadata"
-          />
-        </motion.div>
-      </div>
-    </motion.div>
+    <div data-scroll-section>
+      <motion.div
+        id="Header"
+        className="relative"
+        variants={boxVariants}
+        initial="out"
+        animate="in"
+        key="header"
+        custom={isIntroDone}
+      >
+        <motion.h1 layout variants={iconVariants} key="headerTitle">
+          <span>Studio,</span>{" "}
+        </motion.h1>
+        <div className="videoContainer relative">
+          <motion.p variants={iconVariants} className="absolute">
+            Brand, Strategy, <br /> Identity, Packaging,
+            <br /> Form, Communications.
+          </motion.p>
+          <motion.div variants={iconVariants}>
+            <video
+              src={video}
+              variants={boxVariants}
+              loop
+              muted
+              playsInline
+              autoPlay
+              preload="metadata"
+            />
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
   );
 }

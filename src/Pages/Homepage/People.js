@@ -125,30 +125,31 @@ export default function People({}) {
   }, [control, inView]);
 
   return (
-    <motion.div
-      id="People"
-      ref={ref}
-      key="People"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      variants={homepageFramesVariant}
-      initial="hidden"
-      animate={control}
-      data-scroll-section
-    >
-      <h3>People</h3>
-      <div className="lineContainer">
-        {peopleContent.map((person) => (
-          <motion.div variants={childrenVariants} key={person.id}>
-            <LinePeople
-              content={person}
-              setPhotoDisplayed={setPhotoDisplayed}
-            />
-          </motion.div>
-        ))}
-      </div>
+    <div data-scroll-section>
+      <motion.div
+        id="People"
+        ref={ref}
+        key="People"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        variants={homepageFramesVariant}
+        initial="hidden"
+        animate={control}
+      >
+        <h3>People</h3>
+        <div className="lineContainer">
+          {peopleContent.map((person) => (
+            <motion.div variants={childrenVariants} key={person.id}>
+              <LinePeople
+                content={person}
+                setPhotoDisplayed={setPhotoDisplayed}
+              />
+            </motion.div>
+          ))}
+        </div>
 
-      <FollowingPortrait hovered={hovered} photoDisplayed={photoDisplayed} />
-    </motion.div>
+        <FollowingPortrait hovered={hovered} photoDisplayed={photoDisplayed} />
+      </motion.div>
+    </div>
   );
 }

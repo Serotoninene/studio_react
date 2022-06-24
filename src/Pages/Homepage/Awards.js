@@ -243,21 +243,22 @@ export default function Awards() {
   }, [control, inView]);
 
   return (
-    <motion.div
-      id="Awards"
-      ref={ref}
-      key="Awards"
-      variants={homepageFramesVariant}
-      initial="hidden"
-      animate={control}
-      data-scroll-section
-    >
-      <h3>Awards</h3>
-      {awards.map((award, id) => (
-        <motion.div variants={childrenVariants} key={id * 1000}>
-          <LineAward content={award} />
-        </motion.div>
-      ))}
-    </motion.div>
+    <div data-scroll-section>
+      <motion.div
+        id="Awards"
+        ref={ref}
+        key="Awards"
+        variants={homepageFramesVariant}
+        initial="hidden"
+        animate={control}
+      >
+        <h3>Awards</h3>
+        {awards.map((award, id) => (
+          <motion.div variants={childrenVariants} key={id * 1000}>
+            <LineAward content={award} />
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
   );
 }

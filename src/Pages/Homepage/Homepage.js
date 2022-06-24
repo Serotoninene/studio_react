@@ -22,9 +22,9 @@ export default function Homepage() {
   useEffect(() => {
     locoScroll.current = new LocomotiveScroll({
       el: scrollContainer.current,
-      smooth: false,
+      smooth: true,
       multiplier: 0.8,
-      lerp: 10,
+      lerp: 1.5,
       class: "is-reveal",
     });
 
